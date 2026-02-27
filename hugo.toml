@@ -1,6 +1,22 @@
 baseURL = "/"
-title = "Alex的极简博客"
+title = "陆寒水的博客"
 
+# 加载 Bear 极简主题
 [module]
   [[module.imports]]
     path = "github.com/janraasch/hugo-bearblog"
+
+[params]
+  # 告诉系统：首页要自动展示 blog 文件夹里的文章列表
+  mainSections = ["blog"]
+
+# 加上顶部的导航菜单，方便点击跳转
+[menu]
+  [[menu.main]]
+    name = "首页"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "所有文章"
+    url = "/blog/"
+    weight = 2
