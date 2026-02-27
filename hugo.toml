@@ -1,0 +1,6 @@
+baseURL = "/"
+title = "Alex的极简博客"
+
+[module]
+  [[module.imports]]
+    path = "github.com/janraasch/hugo-bearblog"
