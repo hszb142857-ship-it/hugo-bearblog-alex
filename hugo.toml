@@ -21,3 +21,8 @@ title = "陆寒水的博客"
     name = "所有文章"
     url = "/blog/"
     weight = 2
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # 允许在文章里使用 HTML 魔法！
