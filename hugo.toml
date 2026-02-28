@@ -9,6 +9,7 @@ title = "陆寒水的博客"
 [params]
   # 告诉系统：首页要自动展示 blog 文件夹里的文章列表
   mainSections = ["blog"]
+  custom_css = ["custom.css"]
 
 # 加上顶部的导航菜单，方便点击跳转
 [menu]
