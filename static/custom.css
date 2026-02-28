@@ -1,11 +1,16 @@
 /* 复古纸质模式 */
 body {
-    background-color: #f4f1ea; /* 暖阳羊皮纸背景 */
-    color: #3d3b38; /* 偏柔和的深灰黑色文字 */
+    background-color: #f4f1ea; 
+    color: #3d3b38; 
+    
+    /* 👇 新增的魔法在这里 👇 */
+    font-size: 18px; /* 默认通常是 16px，改成 18px 会大一圈，更适合阅读。你可以随便改数字测试！ */
+    line-height: 1.8; /* 行高调到 1.8 倍，让文字上下透气，不会黑压压挤在一起 */
 }
 
+/* 下面的代码保持你原来的不变就行... */
 a, h1, h2, h3 {
-    color: #8b3a3a; /* 复古暗红色 */
+    color: #8b3a3a; 
 }
 
 a:hover {
