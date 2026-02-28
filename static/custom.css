@@ -1,0 +1,13 @@
+/* 复古纸质模式 */
+body {
+    background-color: #f4f1ea; /* 暖阳羊皮纸背景 */
+    color: #3d3b38; /* 偏柔和的深灰黑色文字 */
+}
+
+a, h1, h2, h3 {
+    color: #8b3a3a; /* 复古暗红色 */
+}
+
+a:hover {
+    color: #d16b6b;
+}
