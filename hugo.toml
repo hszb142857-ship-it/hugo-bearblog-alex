@@ -15,3 +15,6 @@ enableGitInfo = true
   color_scheme = "light"
   # 引入我们的 CSS
   custom_head = '<link rel="stylesheet" href="/custom.css">'
+
+[markup.goldmark.renderer]
+  unsafe = true
