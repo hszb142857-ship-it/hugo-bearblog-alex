@@ -158,6 +158,15 @@ article > p:first-of-type {
   margin-top: 1.25em;
 }
 
+.post-updated {
+  margin-top: 4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .8rem;
+  text-align: right;
+}
+
 blockquote {
   margin: 2rem 0;
   padding: 1.25rem 1.5rem;
@@ -322,7 +331,7 @@ footer {
   }
 }
 
-/* Keep the home page intentionally warm and ivory.
+/* Keep the home page intentionally white.
    Other pages retain the neutral reading background. */
 .home-page,
 .home-intro {
@@ -340,8 +349,4 @@ footer {
   font-size: 1.15rem;
   line-height: 2.1;
   color: #3c3935;
-}
-
-.home-page .home-posts-title {
-  margin-top: 2.5rem;
 }
