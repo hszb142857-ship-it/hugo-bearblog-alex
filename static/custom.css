@@ -32,6 +32,7 @@ html:has(body.home) {
 }
 
 body {
+  background-color: #ffffff !important;
   max-width: var(--site-width);
   margin: 0 auto;
   padding: 42px 28px 56px;
@@ -55,6 +56,7 @@ body.home {
 }
 
 main {
+  background-color: #ffffff !important;
   max-width: var(--reading-width);
   margin: 0 auto;
   line-height: 1.85;
@@ -316,7 +318,8 @@ footer {
 
 /* Keep the home page intentionally warm and ivory.
    Other pages retain the neutral reading background. */
-.home-page {
+.home-page,
+.home-intro {
   background: #ffffff !important;
 }
 
