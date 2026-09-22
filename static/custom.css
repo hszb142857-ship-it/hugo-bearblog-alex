@@ -199,6 +199,12 @@ hr {
   opacity: 1 !important;
 }
 
+/* The homepage poem is framed by two dividers.
+   Give the lower divider the same generous breathing room as the upper one. */
+.home-intro > hr {
+  margin-top: 6rem;
+}
+
 ul, ol {
   padding-left: 1.45em;
 }
