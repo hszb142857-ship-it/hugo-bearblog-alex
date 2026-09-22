@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "zh-cn" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ .Title }} | {{ .Site.Title }}</title>
+  
+  <!-- 强制引入我们的 custom.css，解决 CSS 不生效的问题 -->
+  <link rel="stylesheet" href="/custom.css">
+</head>
+<body>
+  <header>
+    <a href="/">← 返回首页</a>
+  </header>
+  <main>
+    <article>
+      <h1>{{ .Title }}</h1>
+      <p style="color: #8b3a3a; font-size: 0.85em; margin-bottom: 1.5em;">
+        📅 发布于：{{ .Date.Format "2006-01-02" }}
+        {{ if ne .Lastmod .Date }}
+          &nbsp;|&nbsp; 📝 最后一改：{{ .Lastmod.Format "2006-01-02 15:04" }}
+        {{ end }}
+      </p>
+      
+      {{ .Content }}
+    </article>
+  </main>
+</body>
+</html>
