@@ -1,0 +1,9 @@
+<a href="{{ "" | relURL }}" class="title">
+  <h2>{{ .Site.Title }}</h2>
+</a>
+<nav>
+  {{- partial "nav.html" . -}}
+  {{ if not .IsHome }}
+    <a class="home-link" href="{{ "" | relURL }}">← 返回主页</a>
+  {{ end }}
+</nav>
