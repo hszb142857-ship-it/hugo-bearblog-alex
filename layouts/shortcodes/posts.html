@@ -1,0 +1,11 @@
+{{- $posts := where site.RegularPages "Section" "blog" -}}
+<ul class="blog-posts">
+  {{- range $posts.ByDate.Reverse -}}
+    <li>
+      <span>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      </span>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </li>
+  {{- end -}}
+</ul>
