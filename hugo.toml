@@ -26,3 +26,10 @@ title = "陆寒水的博客"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true  # 允许在文章里使用 HTML 魔法！
+
+# 开启 Git 信息读取
+enableGitInfo = true
+
+# 自定义时间显示格式（精确到小时和分钟，例如：2026-09-22 14:30）
+[frontmatter]
+  lastmod = [":git", "lastmod", "date"]
