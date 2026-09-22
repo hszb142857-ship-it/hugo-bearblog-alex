@@ -10,6 +10,8 @@ enableGitInfo = true
   lastmod = [":git", "lastmod", "date"]
 
 [params]
-  description = "A personal space"
-  # 关键：告诉 Bear Theme 引入我们的 custom.css
+  description = "万象挂空明，秋欲三更。"
+  # 强制使用 light 模式，彻底关闭深青色夜间模式！
+  color_scheme = "light"
+  # 引入我们的 CSS
   custom_head = '<link rel="stylesheet" href="/custom.css">'
