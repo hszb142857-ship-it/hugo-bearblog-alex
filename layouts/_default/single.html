@@ -1,8 +1,8 @@
 {{ define "main" }}
 <article>
-  <h1 style="margin-bottom: 0.2em;">{{ .Title }}</h1>
+  <h1>{{ .Title }}</h1>
   
-  <p style="color: #8b3a3a; font-size: 0.85em; margin-top: 0.5em; margin-bottom: 1.8em; opacity: 0.85;">
+  <p style="font-size: 0.85em; opacity: 0.8; margin-top: -0.5em; margin-bottom: 1.5em;">
     📅 发布于：{{ .Date.Format "2006-01-02" }}
     {{ if ne .Lastmod .Date }}
       &nbsp;|&nbsp; 📝 最后一改：{{ .Lastmod.Format "2006-01-02 15:04" }}
