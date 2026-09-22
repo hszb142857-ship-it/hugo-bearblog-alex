@@ -1,120 +1,333 @@
-/* ==================== 0. 强制覆写主题变量，彻底封杀深青色夜间模式 ==================== */
-:root,
-body,
-html,
-@media (prefers-color-scheme: dark) {
-    :root, body, html {
-        --bg: #f4f1ea !important;
-        --text: #2b2a28 !important;
-        --link: #8b3a3a !important;
-        --accent: #8b3a3a !important;
-        background-color: #f4f1ea !important;
-        color: #2b2a28 !important;
-    }
+/* =========================================================
+   Personal design layer
+   Content is intentionally untouched.
+   ========================================================= */
+
+:root {
+  --site-width: 820px;
+  --reading-width: 720px;
+  --page-bg: #ffffff;
+  --home-bg: #f5f1e8;
+  --surface: #ffffff;
+  --text: #2a2927;
+  --muted: #77736c;
+  --heading: #242321;
+  --link: #7a3e3e;
+  --link-hover: #a65a5a;
+  --border: #ded9d0;
+  --quote-bg: #f7f4ee;
+  --quote-border: #9a6767;
+  --code-bg: #f3f1ed;
 }
 
-/* 强制全网页背景与基础文字 */
-html, body {
-    background-color: #f4f1ea !important;
-    color: #2b2a28 !important;
-    font-size: 19px !important;
-    line-height: 1.8 !important;
+* { box-sizing: border-box; }
+
+html {
+  background: var(--page-bg);
+  scroll-behavior: smooth;
 }
 
-/* 标题与链接统一使用深红色 */
-a, h1, h2, h3, h4, h5, h6,
-a:visited, a:active {
-    color: #8b3a3a !important;
+body {
+  max-width: var(--site-width);
+  margin: 0 auto;
+  padding: 42px 28px 56px;
+  color: var(--text);
+  background: var(--page-bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC",
+    "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 17px;
+  line-height: 1.85;
+  letter-spacing: .01em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+body.home,
+body:has(main > .home-page) {
+  background: var(--home-bg);
+}
+
+main {
+  max-width: var(--reading-width);
+  margin: 0 auto;
+  line-height: 1.85;
+}
+
+header {
+  max-width: var(--reading-width);
+  margin: 0 auto 52px;
+}
+
+.title {
+  display: inline-block;
+  color: var(--heading) !important;
+  text-decoration: none !important;
+}
+
+.title h2 {
+  margin: 0;
+  color: var(--heading) !important;
+  font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+nav {
+  margin-top: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+nav a {
+  margin: 0 !important;
+  color: var(--muted) !important;
+  font-size: .9rem;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: var(--link-hover) !important;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading) !important;
+  font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+h1 {
+  margin: 0 0 .45em;
+  font-size: clamp(2rem, 5vw, 2.65rem);
+  letter-spacing: -.02em;
+}
+
+h2 {
+  margin-top: 2.4em;
+  font-size: 1.65rem;
+}
+
+h3 {
+  margin-top: 2em;
+  font-size: 1.3rem;
+}
+
+p { margin: 1.05em 0; }
+
+a, a:visited, a:active {
+  color: var(--link) !important;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 a:hover {
-    color: #d16b6b !important;
+  color: var(--link-hover) !important;
 }
 
 strong, b {
-    color: #8b3a3a !important;
-    font-weight: 700 !important;
+  color: inherit !important;
+  font-weight: 700;
 }
 
-/* ==================== 诗歌与引用块 ==================== */
-blockquote, 
+article {
+  max-width: var(--reading-width);
+}
+
+.post-meta {
+  margin: 0 0 2.8rem;
+  color: var(--muted);
+  font-size: .84rem;
+  font-weight: 400;
+}
+
+article > p:first-of-type {
+  margin-top: 1.25em;
+}
+
+blockquote {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  color: var(--text);
+  background: var(--quote-bg);
+  border-left: 3px solid var(--quote-border);
+  font-style: normal;
+}
+
+blockquote p {
+  margin: 0;
+}
+
 blockquote.poem {
-    margin: 1.8em 0 !important;
-    padding: 1.2em 1.5em !important;
-    background-color: rgba(139, 58, 58, 0.06) !important;
-    border-left: 4px solid #8b3a3a !important;
-    font-size: 1.05em !important;
-    line-height: 1.6 !important;
+  padding: 1.5rem 1.6rem;
+  border-left-width: 3px;
 }
 
-blockquote p,
-blockquote.poem p {
-    color: #8b3a3a !important;
-    font-weight: 600 !important;
-    margin: 0 !important;
-    opacity: 1 !important;
+blockquote.poem p,
+blockquote.poem-de p {
+  color: inherit !important;
+  font-weight: 400 !important;
+  line-height: 1.75 !important;
 }
 
 blockquote.poem-de {
-    border-left-color: #2b2a28 !important;
-    background-color: rgba(0, 0, 0, 0.03) !important;
-}
-
-blockquote.poem-de p {
-    color: #1a1918 !important;
-    font-style: normal !important;
-    font-weight: 600 !important;
-    opacity: 1 !important;
+  background: #f2f0ec !important;
+  border-left-color: #77736c !important;
 }
 
 .stanza-gap {
-    height: 12px !important;
+  height: 1rem !important;
 }
 
 hr {
-    border: none !important;
-    border-top: 1px dashed #8b3a3a !important;
-    margin: 2.2em 0 !important;
-    opacity: 0.5 !important;
+  margin: 3rem 0;
+  border: 0 !important;
+  border-top: 1px solid var(--border) !important;
+  opacity: 1 !important;
 }
 
-/* 维基卡片 */
-.author-card {
-    margin-top: 3em !important;
-    padding: 1.5em !important;
-    background-color: rgba(139, 58, 58, 0.04) !important;
-    border: 1px solid rgba(139, 58, 58, 0.25) !important;
-    border-radius: 4px !important;
+ul, ol {
+  padding-left: 1.45em;
 }
 
-.author-card h3 {
-    margin-top: 0 !important;
-    margin-bottom: 0.6em !important;
-    font-size: 1.25em !important;
-    border-bottom: 1px solid rgba(139, 58, 58, 0.2) !important;
-    padding-bottom: 0.4em !important;
-    color: #8b3a3a !important;
+li { margin: .35em 0; }
+
+ul.blog-posts {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.author-meta {
-    font-size: 0.9em !important;
-    color: #8b3a3a !important;
-    margin-bottom: 1em !important;
+ul.blog-posts li {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  align-items: baseline;
+  gap: 18px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.author-bio p {
-    font-size: 0.95em !important;
-    line-height: 1.7 !important;
-    color: #2b2a28 !important;
-    margin-bottom: 0.8em !important;
+ul.blog-posts li:first-child {
+  border-top: 1px solid var(--border);
 }
 
-.author-bio ul {
-    font-size: 0.9em !important;
-    padding-left: 1.2em !important;
-    color: #8b3a3a !important;
+ul.blog-posts li span {
+  flex: none;
+  color: var(--muted);
+  font-size: .82rem;
+  white-space: nowrap;
 }
 
-.author-bio li {
-    margin-bottom: 0.4em !important;
+ul.blog-posts li a {
+  font-size: 1rem;
+}
+
+code {
+  padding: .15em .35em;
+  color: #514a43;
+  background: var(--code-bg);
+  border-radius: 4px;
+  font-size: .88em;
+}
+
+pre {
+  margin: 1.5em 0;
+  padding: 1.15rem 1.3rem;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+pre code {
+  padding: 0;
+  background: transparent;
+}
+
+table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: .6rem .75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+time {
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .82rem;
+}
+
+footer {
+  max-width: var(--reading-width);
+  margin: 4.5rem auto 0;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .82rem;
+  text-align: center;
+}
+
+@media (max-width: 680px) {
+  body {
+    padding: 28px 20px 44px;
+    font-size: 16px;
+  }
+
+  header {
+    margin-bottom: 38px;
+  }
+
+  ul.blog-posts li {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  ul.blog-posts li span {
+    font-size: .78rem;
+  }
+
+  blockquote {
+    padding: 1rem 1.15rem;
+  }
+}
+
+/* Keep the home page intentionally warm and ivory.
+   Other pages retain the neutral reading background. */
+body.home,
+body:has(main > .home-page),
+.home-page {
+  background: var(--home-bg) !important;
+}
+
+.home-page {
+  min-height: 55vh;
+  padding: 1.5rem 0 3rem;
+}
+
+.home-page .home-intro {
+  margin: 0 auto 3rem;
+  font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+  font-size: 1.15rem;
+  line-height: 2.1;
+  color: #3c3935;
+}
+
+.home-page .home-posts-title {
+  margin-top: 2.5rem;
 }
