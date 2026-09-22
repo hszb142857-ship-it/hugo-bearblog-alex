@@ -1,11 +1,5 @@
-/* ==================== 0. 强行锁定复古纸质色系（防止主题夜间模式干扰） ==================== */
-:root {
-    --bg: #f4f1ea !important;
-    --text: #2b2a28 !important;
-    --link: #8b3a3a !important;
-    --accent: #8b3a3a !important;
-}
-
+/* ==================== 0. 锁定纸质色彩变量 (防止夜间模式变青) ==================== */
+:root,
 @media (prefers-color-scheme: dark) {
     :root {
         --bg: #f4f1ea !important;
@@ -15,17 +9,17 @@
     }
 }
 
-/* ==================== 1. 复古纸质主框架 ==================== */
+/* ==================== 1. 全局基础排版 ==================== */
 body {
-    background-color: #f4f1ea !important; 
-    color: #2b2a28 !important; /* 正文主色调调深，确保绝对清晰 */
-    font-size: 20px;
-    line-height: 1.8;
+    background-color: #f4f1ea !important;
+    color: #2b2a28 !important;
+    font-size: 19px !important;
+    line-height: 1.8 !important;
 }
 
-/* 标题、链接与粗体 */
+/* 标题与链接强行采用深红 */
 a, h1, h2, h3, h4, h5, h6 {
-    color: #8b3a3a !important; 
+    color: #8b3a3a !important;
 }
 
 a:hover {
@@ -33,60 +27,55 @@ a:hover {
 }
 
 strong, b {
-    color: #8b3a3a !important; /* 粗体文字强制改用浓郁深红 */
+    color: #8b3a3a !important;
     font-weight: 700 !important;
 }
 
-/* ==================== 2. 诗歌与引用块美化 ==================== */
-
-/* 通用引用/诗歌容器 */
+/* ==================== 2. 诗歌与引用块 ==================== */
 blockquote, 
 blockquote.poem {
     margin: 1.8em 0 !important;
     padding: 1.2em 1.5em !important;
-    background-color: rgba(139, 58, 58, 0.05) !important; /* 淡淡的复古红衬底 */
-    border-left: 4px solid #8b3a3a !important; /* 左侧深红立柱 */
-    font-size: 1.05em;
-    line-height: 1.6;
+    background-color: rgba(139, 58, 58, 0.05) !important;
+    border-left: 4px solid #8b3a3a !important;
+    font-size: 1.05em !important;
+    line-height: 1.6 !important;
 }
 
-/* 中文诗歌正文：高对比度深红色 */
+/* 中文诗：清晰深红 */
 blockquote p,
 blockquote.poem p {
-    color: #8b3a3a !important; /* 强制深红 */
-    font-weight: 600 !important; /* 明确加粗 */
+    color: #8b3a3a !important;
+    font-weight: 600 !important;
     margin: 0 !important;
     opacity: 1 !important;
 }
 
-/* 德语原文专属：加深为纯正的硬核墨色 */
+/* 德语诗：清晰黑墨色，取消斜体发虚 */
 blockquote.poem-de {
-    border-left-color: #2b2a28 !important; /* 左侧改为沉稳墨色边框 */
+    border-left-color: #2b2a28 !important;
     background-color: rgba(0, 0, 0, 0.03) !important;
 }
 
 blockquote.poem-de p {
-    color: #1a1918 !important; /* 德语部分采用接近纯黑的沉稳墨色 */
-    font-style: normal !important; /* 取消斜体 */
+    color: #1a1918 !important;
+    font-style: normal !important;
     font-weight: 600 !important;
     opacity: 1 !important;
 }
 
-/* 诗节小间距 */
 .stanza-gap {
-    height: 12px; 
+    height: 12px !important;
 }
 
-/* 分割线 */
 hr {
     border: none !important;
     border-top: 1px dashed #8b3a3a !important;
     margin: 2.2em 0 !important;
-    opacity: 0.6 !important;
+    opacity: 0.5 !important;
 }
 
-/* ==================== 3. 维基百科生平卡片 ==================== */
-
+/* ==================== 3. 维基生平卡片 ==================== */
 .author-card {
     margin-top: 3em !important;
     padding: 1.5em !important;
