@@ -1,3 +1,20 @@
+/* ==================== 0. 强行锁定复古纸质色系（防止主题夜间模式干扰） ==================== */
+:root {
+    --bg: #f4f1ea !important;
+    --text: #2b2a28 !important;
+    --link: #8b3a3a !important;
+    --accent: #8b3a3a !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #f4f1ea !important;
+        --text: #2b2a28 !important;
+        --link: #8b3a3a !important;
+        --accent: #8b3a3a !important;
+    }
+}
+
 /* ==================== 1. 复古纸质主框架 ==================== */
 body {
     background-color: #f4f1ea !important; 
@@ -20,7 +37,7 @@ strong, b {
     font-weight: 700 !important;
 }
 
-/* ==================== 2. 诗歌与引用块美化（强制提权） ==================== */
+/* ==================== 2. 诗歌与引用块美化 ==================== */
 
 /* 通用引用/诗歌容器 */
 blockquote, 
@@ -39,18 +56,18 @@ blockquote.poem p {
     color: #8b3a3a !important; /* 强制深红 */
     font-weight: 600 !important; /* 明确加粗 */
     margin: 0 !important;
-    opacity: 1 !important; /* 防止主题设置透明度导致变浅 */
+    opacity: 1 !important;
 }
 
-/* 德语原文专属：加深为纯正的硬核墨色，清晰易读 */
+/* 德语原文专属：加深为纯正的硬核墨色 */
 blockquote.poem-de {
     border-left-color: #2b2a28 !important; /* 左侧改为沉稳墨色边框 */
     background-color: rgba(0, 0, 0, 0.03) !important;
 }
 
 blockquote.poem-de p {
-    color: #1a1918 !important; /* 德语部分直接采用接近纯黑的沉稳墨色 */
-    font-style: normal !important; /* 取消斜体，防止排版虚幻 */
+    color: #1a1918 !important; /* 德语部分采用接近纯黑的沉稳墨色 */
+    font-style: normal !important; /* 取消斜体 */
     font-weight: 600 !important;
     opacity: 1 !important;
 }
