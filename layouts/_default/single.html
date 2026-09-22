@@ -1,13 +1,16 @@
 {{ define "main" }}
 <article>
   <h1>{{ .Title }}</h1>
-  
-  <p style="font-size: 0.85em; color: #8b3a3a; margin-top: -0.5em; margin-bottom: 1.5em; font-weight: bold;">
-    📅 发布于：{{ .Date.Format "2006-01-02" }}
+
+  <div class="post-meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">
+      {{ .Date.Format "2006-01-02" }}
+    </time>
     {{ if ne .Lastmod .Date }}
-      &nbsp;|&nbsp; 📝 最后一改：{{ .Lastmod.Format "2006-01-02 15:04" }}
+      <span aria-hidden="true"> · </span>
+      <span>更新于 {{ .Lastmod.Format "2006-01-02 15:04" }}</span>
     {{ end }}
-  </p>
+  </div>
 
   {{ .Content }}
 </article>
