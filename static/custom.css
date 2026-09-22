@@ -1,109 +1,111 @@
-/* 复古纸质模式 */
+/* ==================== 1. 复古纸质主框架 ==================== */
 body {
-    background-color: #f4f1ea; 
-    color: #3d3b38; 
-    
+    background-color: #f4f1ea !important; 
+    color: #2b2a28 !important; /* 正文主色调调深，确保绝对清晰 */
     font-size: 20px;
     line-height: 1.8;
 }
 
-/* 标题与链接统一使用深红色 */
+/* 标题、链接与粗体 */
 a, h1, h2, h3, h4, h5, h6 {
-    color: #8b3a3a; 
+    color: #8b3a3a !important; 
 }
 
 a:hover {
-    color: #d16b6b;
+    color: #d16b6b !important;
 }
 
-/* 粗体文本统一加深加红 */
 strong, b {
-    color: #8b3a3a;
-    font-weight: 600;
+    color: #8b3a3a !important; /* 粗体文字强制改用浓郁深红 */
+    font-weight: 700 !important;
 }
 
-/* ==================== 诗歌与文章专属美化 ==================== */
+/* ==================== 2. 诗歌与引用块美化（强制提权） ==================== */
 
-/* 1. 诗歌容器：独立成块，左右内缩，更像实体书排版 */
+/* 通用引用/诗歌容器 */
+blockquote, 
 blockquote.poem {
-    margin: 1.8em 0;
-    padding: 1.2em 1.5em;
-    background-color: rgba(139, 58, 58, 0.04); /* 淡淡的复古红衬底 */
-    border-left: 3px solid #8b3a3a; /* 左侧优雅的主色调红线条 */
+    margin: 1.8em 0 !important;
+    padding: 1.2em 1.5em !important;
+    background-color: rgba(139, 58, 58, 0.05) !important; /* 淡淡的复古红衬底 */
+    border-left: 4px solid #8b3a3a !important; /* 左侧深红立柱 */
     font-size: 1.05em;
-    line-height: 1.6; /* 诗歌内部行距更紧凑舒适 */
+    line-height: 1.6;
 }
 
-/* 诗歌正文：加粗并使用深红主色 */
+/* 中文诗歌正文：高对比度深红色 */
+blockquote p,
 blockquote.poem p {
-    color: #8b3a3a;
-    font-weight: 600;
-    margin: 0;
+    color: #8b3a3a !important; /* 强制深红 */
+    font-weight: 600 !important; /* 明确加粗 */
+    margin: 0 !important;
+    opacity: 1 !important; /* 防止主题设置透明度导致变浅 */
 }
 
-/* 节与节之间的间距 */
-blockquote.poem .stanza-gap {
-    height: 12px; 
-}
-
-/* 2. 德语原文专属样式（同步改为深红色，取消斜体确保清晰度） */
+/* 德语原文专属：加深为纯正的硬核墨色，清晰易读 */
 blockquote.poem-de {
-    border-left-color: #8b3a3a; /* 左侧边框改为深红色 */
-    background-color: rgba(139, 58, 58, 0.03);
+    border-left-color: #2b2a28 !important; /* 左侧改为沉稳墨色边框 */
+    background-color: rgba(0, 0, 0, 0.03) !important;
 }
 
 blockquote.poem-de p {
-    color: #8b3a3a; /* 浅灰色改为深红文本 */
-    font-style: normal; /* 取消斜体，提升清晰度 */
-    font-weight: 550;
+    color: #1a1918 !important; /* 德语部分直接采用接近纯黑的沉稳墨色 */
+    font-style: normal !important; /* 取消斜体，防止排版虚幻 */
+    font-weight: 600 !important;
+    opacity: 1 !important;
 }
 
-/* 3. 优化水平分割线 */
+/* 诗节小间距 */
+.stanza-gap {
+    height: 12px; 
+}
+
+/* 分割线 */
 hr {
-    border: none;
-    border-top: 1px dashed #8b3a3a; /* 改为复古虚线 */
-    margin: 2.2em 0;
-    opacity: 0.5;
+    border: none !important;
+    border-top: 1px dashed #8b3a3a !important;
+    margin: 2.2em 0 !important;
+    opacity: 0.6 !important;
 }
 
-/* ==================== 诗人生平与背景卡片 ==================== */
+/* ==================== 3. 维基百科生平卡片 ==================== */
 
 .author-card {
-    margin-top: 3em;
-    padding: 1.5em;
-    background-color: rgba(139, 58, 58, 0.03);
-    border: 1px solid rgba(139, 58, 58, 0.2);
-    border-radius: 4px;
+    margin-top: 3em !important;
+    padding: 1.5em !important;
+    background-color: rgba(139, 58, 58, 0.04) !important;
+    border: 1px solid rgba(139, 58, 58, 0.25) !important;
+    border-radius: 4px !important;
 }
 
 .author-card h3 {
-    margin-top: 0;
-    margin-bottom: 0.6em;
-    font-size: 1.25em;
-    border-bottom: 1px solid rgba(139, 58, 58, 0.2);
-    padding-bottom: 0.4em;
-    color: #8b3a3a;
+    margin-top: 0 !important;
+    margin-bottom: 0.6em !important;
+    font-size: 1.25em !important;
+    border-bottom: 1px solid rgba(139, 58, 58, 0.2) !important;
+    padding-bottom: 0.4em !important;
+    color: #8b3a3a !important;
 }
 
 .author-meta {
-    font-size: 0.9em;
-    color: #8b3a3a; /* 灰色改为深红色 */
-    margin-bottom: 1em;
+    font-size: 0.9em !important;
+    color: #8b3a3a !important;
+    margin-bottom: 1em !important;
 }
 
 .author-bio p {
-    font-size: 0.95em;
-    line-height: 1.7;
-    color: #3d3b38;
-    margin-bottom: 0.8em;
+    font-size: 0.95em !important;
+    line-height: 1.7 !important;
+    color: #2b2a28 !important;
+    margin-bottom: 0.8em !important;
 }
 
 .author-bio ul {
-    font-size: 0.9em;
-    padding-left: 1.2em;
-    color: #8b3a3a; /* 列表文字改为深红色 */
+    font-size: 0.9em !important;
+    padding-left: 1.2em !important;
+    color: #8b3a3a !important;
 }
 
 .author-bio li {
-    margin-bottom: 0.4em;
+    margin-bottom: 0.4em !important;
 }
