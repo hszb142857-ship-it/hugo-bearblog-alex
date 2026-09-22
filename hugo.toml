@@ -10,6 +10,10 @@ title = "陆寒水的博客"
   # 告诉系统：首页要自动展示 blog 文件夹里的文章列表
   mainSections = ["blog"]
   custom_css = ["custom.css"]
+  # 强制关闭暗色模式，永远保持米白/浅色复古纸质风格
+  title = "你的博客名称"
+  # 加这一行导入 custom.css，这是 bearblog 官方支持的最稳妥方式！
+  custom_head = '<link rel="stylesheet" href="/custom.css">'
 
 # 加上顶部的导航菜单，方便点击跳转
 [menu]
