@@ -16,3 +16,47 @@ a, h1, h2, h3 {
 a:hover {
     color: #d16b6b;
 }
+
+/* ==================== 诗歌与文章专属美化 ==================== */
+
+/* 1. 诗歌容器：独立成块，左右内缩，更像实体书排版 */
+blockquote.poem {
+    margin: 1.8em 0;
+    padding: 1.2em 1.5em;
+    background-color: rgba(139, 58, 58, 0.04); /* 淡淡的复古红衬底 */
+    border-left: 3px solid #8b3a3a; /* 左侧优雅的主色调红线条 */
+    font-size: 1.05em;
+    line-height: 1.6; /* 诗歌内部行距更紧凑舒适 */
+}
+
+/* 诗歌正文：稍微加粗，使用复古深色 */
+blockquote.poem p {
+    color: #2b2a28;
+    font-weight: 550; /* 微微加粗，清晰但不粗暴 */
+    margin: 0;
+}
+
+/* 节与节之间的间距：比直接换两行更小、更精致 */
+blockquote.poem .stanza-gap {
+    height: 12px; 
+}
+
+/* 2. 德语原文专属样式（柔和深灰色 + 优雅斜体感） */
+blockquote.poem-de {
+    border-left-color: #6e6b66; /* 稍微低调的灰色边框 */
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+blockquote.poem-de p {
+    color: #4a4845;
+    font-style: italic; /* 德语西文字体带一点斜体更有味道 */
+    font-weight: 500;
+}
+
+/* 3. 优化水平分割线 */
+hr {
+    border: none;
+    border-top: 1px dashed #8b3a3a; /* 改为复古虚线 */
+    margin: 2.2em 0;
+    opacity: 0.35;
+}
