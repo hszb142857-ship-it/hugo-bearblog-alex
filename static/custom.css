@@ -7,7 +7,7 @@
   --site-width: 820px;
   --reading-width: 720px;
   --page-bg: #ffffff;
-  --home-bg: #f5f1e8;
+  --home-bg: #ffffff;
   --surface: #ffffff;
   --text: #2a2927;
   --muted: #77736c;
@@ -28,7 +28,7 @@ html {
 }
 
 html:has(body.home) {
-  background: var(--home-bg) !important;
+  background: #ffffff !important;
 }
 
 body {
@@ -51,7 +51,7 @@ body.page {
 }
 
 body.home {
-  background: var(--home-bg) !important;
+  background: #ffffff !important;
 }
 
 main {
@@ -317,7 +317,7 @@ footer {
 /* Keep the home page intentionally warm and ivory.
    Other pages retain the neutral reading background. */
 .home-page {
-  background: var(--home-bg) !important;
+  background: #ffffff !important;
 }
 
 .home-page {
