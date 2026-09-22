@@ -3,18 +3,23 @@ body {
     background-color: #f4f1ea; 
     color: #3d3b38; 
     
-    /* 👇 新增的魔法在这里 👇 */
-    font-size: 20px; /* 默认通常是 16px，改成 18px 会大一圈，更适合阅读。你可以随便改数字测试！ */
-    line-height: 1.8; /* 行高调到 1.8 倍，让文字上下透气，不会黑压压挤在一起 */
+    font-size: 20px;
+    line-height: 1.8;
 }
 
-/* 下面的代码保持你原来的不变就行... */
-a, h1, h2, h3 {
+/* 标题与链接统一使用深红色 */
+a, h1, h2, h3, h4, h5, h6 {
     color: #8b3a3a; 
 }
 
 a:hover {
     color: #d16b6b;
+}
+
+/* 粗体文本统一加深加红 */
+strong, b {
+    color: #8b3a3a;
+    font-weight: 600;
 }
 
 /* ==================== 诗歌与文章专属美化 ==================== */
@@ -29,28 +34,28 @@ blockquote.poem {
     line-height: 1.6; /* 诗歌内部行距更紧凑舒适 */
 }
 
-/* 诗歌正文：稍微加粗，使用复古深色 */
+/* 诗歌正文：加粗并使用深红主色 */
 blockquote.poem p {
-    color: #2b2a28;
-    font-weight: 550; /* 微微加粗，清晰但不粗暴 */
+    color: #8b3a3a;
+    font-weight: 600;
     margin: 0;
 }
 
-/* 节与节之间的间距：比直接换两行更小、更精致 */
+/* 节与节之间的间距 */
 blockquote.poem .stanza-gap {
     height: 12px; 
 }
 
-/* 2. 德语原文专属样式（柔和深灰色 + 优雅斜体感） */
+/* 2. 德语原文专属样式（同步改为深红色，取消斜体确保清晰度） */
 blockquote.poem-de {
-    border-left-color: #6e6b66; /* 稍微低调的灰色边框 */
-    background-color: rgba(0, 0, 0, 0.02);
+    border-left-color: #8b3a3a; /* 左侧边框改为深红色 */
+    background-color: rgba(139, 58, 58, 0.03);
 }
 
 blockquote.poem-de p {
-    color: #4a4845;
-    font-style: italic; /* 德语西文字体带一点斜体更有味道 */
-    font-weight: 500;
+    color: #8b3a3a; /* 浅灰色改为深红文本 */
+    font-style: normal; /* 取消斜体，提升清晰度 */
+    font-weight: 550;
 }
 
 /* 3. 优化水平分割线 */
@@ -58,7 +63,7 @@ hr {
     border: none;
     border-top: 1px dashed #8b3a3a; /* 改为复古虚线 */
     margin: 2.2em 0;
-    opacity: 0.35;
+    opacity: 0.5;
 }
 
 /* ==================== 诗人生平与背景卡片 ==================== */
@@ -77,11 +82,12 @@ hr {
     font-size: 1.25em;
     border-bottom: 1px solid rgba(139, 58, 58, 0.2);
     padding-bottom: 0.4em;
+    color: #8b3a3a;
 }
 
 .author-meta {
     font-size: 0.9em;
-    color: #6e6b66;
+    color: #8b3a3a; /* 灰色改为深红色 */
     margin-bottom: 1em;
 }
 
@@ -95,7 +101,7 @@ hr {
 .author-bio ul {
     font-size: 0.9em;
     padding-left: 1.2em;
-    color: #4a4845;
+    color: #8b3a3a; /* 列表文字改为深红色 */
 }
 
 .author-bio li {
