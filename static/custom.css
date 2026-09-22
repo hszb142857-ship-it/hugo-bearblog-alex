@@ -1,24 +1,14 @@
-/* ==================== 0. 锁定纸质色彩变量 (防止夜间模式变青) ==================== */
-:root,
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: #f4f1ea !important;
-        --text: #2b2a28 !important;
-        --link: #8b3a3a !important;
-        --accent: #8b3a3a !important;
-    }
-}
-
-/* ==================== 1. 全局基础排版 ==================== */
-body {
+/* 1. 强行锁定全站背景为米白，文字为浓墨深色 */
+html, body {
     background-color: #f4f1ea !important;
     color: #2b2a28 !important;
     font-size: 19px !important;
     line-height: 1.8 !important;
 }
 
-/* 标题与链接强行采用深红 */
-a, h1, h2, h3, h4, h5, h6 {
+/* 2. 强行锁定所有标题与链接为深红 */
+a, h1, h2, h3, h4, h5, h6,
+a:visited, a:active {
     color: #8b3a3a !important;
 }
 
@@ -31,18 +21,18 @@ strong, b {
     font-weight: 700 !important;
 }
 
-/* ==================== 2. 诗歌与引用块 ==================== */
+/* 3. 诗歌与引用块样式 */
 blockquote, 
 blockquote.poem {
     margin: 1.8em 0 !important;
     padding: 1.2em 1.5em !important;
-    background-color: rgba(139, 58, 58, 0.05) !important;
+    background-color: rgba(139, 58, 58, 0.06) !important;
     border-left: 4px solid #8b3a3a !important;
     font-size: 1.05em !important;
     line-height: 1.6 !important;
 }
 
-/* 中文诗：清晰深红 */
+/* 中文诗：高对比深红 */
 blockquote p,
 blockquote.poem p {
     color: #8b3a3a !important;
@@ -51,7 +41,7 @@ blockquote.poem p {
     opacity: 1 !important;
 }
 
-/* 德语诗：清晰黑墨色，取消斜体发虚 */
+/* 德语诗：纯正硬核墨黑 */
 blockquote.poem-de {
     border-left-color: #2b2a28 !important;
     background-color: rgba(0, 0, 0, 0.03) !important;
@@ -75,7 +65,7 @@ hr {
     opacity: 0.5 !important;
 }
 
-/* ==================== 3. 维基生平卡片 ==================== */
+/* 4. 维基卡片 */
 .author-card {
     margin-top: 3em !important;
     padding: 1.5em !important;
