@@ -37,9 +37,10 @@ Authentication -> Users
 
 然后退出博客并重新登录一次，使新的 app_metadata 进入 JWT。
 
-管理员审核地址：
+管理员审核方式：
 
-https://hanshui.space/admin/comments/
+登录博客后，在留言板下方会出现“留言管理”。只有 app_metadata 中
+comment_admin=true 的账号能看到并使用审核面板。
 
 ## 4. 配置 Hugo
 
