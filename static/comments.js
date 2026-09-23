@@ -154,15 +154,13 @@
       const actions = document.createElement("div");
       actions.className = "comments-admin-actions";
 
-      if (comment.status !== "approved") {
+      if (comment.status === "pending") {
         const approve = document.createElement("button");
         approve.type = "button";
         approve.textContent = "通过";
         approve.onclick = () => updateCommentStatus(comment.id, "approved");
         actions.append(approve);
-      }
 
-      if (comment.status !== "rejected") {
         const reject = document.createElement("button");
         reject.type = "button";
         reject.textContent = "拒绝";
@@ -170,24 +168,49 @@
         actions.append(reject);
       }
 
-      const remove = document.createElement("button");
-      remove.type = "button";
-      remove.textContent = "删除";
-      remove.onclick = async () => {
-        if (!window.confirm("确定删除这条留言吗？")) return;
-        const { error: deleteError } = await client
-          .from("comments")
-          .delete()
-          .eq("id", comment.id);
+      if (comment.status === "approved") {
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.textContent = "删除";
+        remove.onclick = async () => {
+          if (!window.confirm("确定删除这条已通过的留言吗？")) return;
+          const { error: deleteError } = await client
+            .from("comments")
+            .delete()
+            .eq("id", comment.id);
 
-        if (deleteError) {
-          setAdminStatus("删除失败：" + deleteError.message, true);
-        } else {
+          if (deleteError) {
+            setAdminStatus("删除失败：" + deleteError.message, true);
+            return;
+          }
+
           await loadAdminComments();
           await loadComments();
-        }
-      };
-      actions.append(remove);
+        };
+        actions.append(remove);
+      }
+
+      if (comment.status === "rejected") {
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.textContent = "删除";
+        remove.onclick = async () => {
+          if (!window.confirm("确定删除这条留言吗？")) return;
+          const { error: deleteError } = await client
+            .from("comments")
+            .delete()
+            .eq("id", comment.id);
+
+          if (deleteError) {
+            setAdminStatus("删除失败：" + deleteError.message, true);
+            return;
+          }
+
+          await loadAdminComments();
+          await loadComments();
+        };
+        actions.append(remove);
+      }
 
       item.append(meta, body, actions);
       adminList.append(item);
