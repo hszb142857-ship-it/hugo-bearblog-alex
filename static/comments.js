@@ -33,6 +33,7 @@
   const adminRefresh = root.querySelector("[data-admin-refresh]");
 
   let currentUser = null;
+  let commentsLoadToken = 0;
 
   function setStatus(message, isError = false) {
     status.textContent = message || "";
@@ -209,6 +210,7 @@
   }
 
   async function loadComments() {
+    const loadToken = ++commentsLoadToken;
     list.replaceChildren();
 
     const { data, error } = await client
@@ -216,6 +218,8 @@
       .select("id, user_id, display_name, content, status, created_at")
       .eq("page_path", pagePath)
       .order("created_at", { ascending: true });
+
+    if (loadToken !== commentsLoadToken) return;
 
     if (error) {
       setStatus("留言暂时无法加载，请稍后再试。", true);
