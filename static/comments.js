@@ -217,7 +217,7 @@
       .from("comments")
       .select("id, user_id, display_name, content, status, created_at")
       .eq("page_path", pagePath)
-      .order("created_at", { ascending: true });
+      .order("created_at", { ascending: false });
 
     if (loadToken !== commentsLoadToken) return;
 
