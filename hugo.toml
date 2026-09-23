@@ -16,5 +16,12 @@ enableGitInfo = true
   # 引入我们的 CSS
   custom_head = '<link rel="stylesheet" href="/custom.css">'
 
+[params.comments]
+  # 留言系统基础代码已经加入，但默认关闭。
+  # 完成 Supabase + Google 配置后，再改成 true。
+  enabled = false
+  supabase_url = ""
+  supabase_publishable_key = ""
+
 [markup.goldmark.renderer]
   unsafe = true
