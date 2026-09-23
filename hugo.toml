@@ -16,5 +16,11 @@ enableGitInfo = true
   # 引入我们的 CSS
   custom_head = '<link rel="stylesheet" href="/custom.css">'
 
+[params.comments]
+  # Google 登录 + Supabase 留言系统
+  enabled = true
+  supabase_url = "https://cqvcepicdxkklfnumxsw.supabase.co"
+  supabase_publishable_key = "sb_publishable_CAUT1Vmjl1NVm1s6lTbH1g_Uu76yF5U"
+
 [markup.goldmark.renderer]
   unsafe = true

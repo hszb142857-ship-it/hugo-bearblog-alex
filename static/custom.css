@@ -350,3 +350,282 @@ footer {
   line-height: 2.1;
   color: #3c3935;
 }
+
+
+/* =========================================================
+   Comments
+   ========================================================= */
+
+.comments {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.comments-heading h2 {
+  margin: 0 0 .35rem;
+  font-size: 1.45rem;
+}
+
+.comments-heading p {
+  margin: 0 0 1.4rem;
+  color: var(--muted);
+  font-size: .86rem;
+}
+
+.comments-login {
+  margin: 1rem 0 1.5rem;
+}
+
+.comments-google-button,
+.comments-form-footer button {
+  appearance: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+  padding: .62rem 1rem;
+  font: inherit;
+  font-size: .9rem;
+  cursor: pointer;
+}
+
+.comments-google-button:hover,
+.comments-form-footer button:hover {
+  border-color: var(--link);
+  color: var(--link);
+}
+
+.comments-userbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .9rem;
+}
+
+.comments-userbar span {
+  color: var(--heading);
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.comments-signout {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: .82rem;
+}
+
+.comments-signout:hover {
+  color: var(--link);
+}
+
+.comments-form textarea {
+  display: block;
+  width: 100%;
+  min-height: 130px;
+  padding: .85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  line-height: 1.7;
+  resize: vertical;
+}
+
+.comments-form textarea:focus {
+  outline: 2px solid rgba(122, 62, 62, .16);
+  border-color: var(--link);
+}
+
+.comments-form label {
+  display: block;
+  margin-bottom: .45rem;
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.comments-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: .7rem;
+}
+
+.comments-hint {
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.comments-form-footer button:disabled {
+  opacity: .55;
+  cursor: wait;
+}
+
+.comments-status {
+  min-height: 1.4em;
+  margin: 1rem 0;
+  color: var(--muted);
+  font-size: .84rem;
+}
+
+.comments-status.is-error {
+  color: #9b4444;
+}
+
+.comments-list {
+  margin-top: 1.4rem;
+}
+
+.comment-item {
+  padding: 1.15rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+}
+
+.comment-avatar {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: #f7f4ee;
+  color: var(--muted);
+  font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+  font-size: .9rem;
+}
+
+.comment-author {
+  display: flex;
+  align-items: baseline;
+  gap: .65rem;
+}
+
+.comment-author strong {
+  color: var(--heading);
+  font-size: .9rem;
+}
+
+.comment-author time {
+  font-size: .74rem;
+}
+
+.comment-body {
+  margin: .7rem 0 0 2.75rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.75;
+}
+
+.comment-pending {
+  margin: .55rem 0 0 2.75rem;
+  color: var(--muted);
+  font-size: .76rem;
+}
+
+.comments-empty {
+  color: var(--muted);
+  font-size: .86rem;
+}
+
+@media (max-width: 680px) {
+  .comments-form-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .comment-body,
+  .comment-pending {
+    margin-left: 0;
+  }
+}
+
+
+.comments-admin {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border);
+}
+
+.comments-admin-heading,
+.comments-admin-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.comments-admin-heading {
+  color: var(--muted);
+  font-size: .84rem;
+}
+
+.comments-admin-toolbar {
+  margin: .8rem 0;
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.comments-admin-status {
+  min-height: 1.3em;
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.comments-admin-status.is-error {
+  color: #9b4444;
+}
+
+.comments-admin-item {
+  padding: .9rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.comments-admin-meta {
+  color: var(--muted);
+  font-size: .75rem;
+  line-height: 1.6;
+}
+
+.comments-admin-content {
+  margin: .4rem 0 .65rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.7;
+}
+
+.comments-admin-actions {
+  display: flex;
+  gap: .45rem;
+  flex-wrap: wrap;
+}
+
+.comments-admin-actions button {
+  appearance: none;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: #fff;
+  color: var(--text);
+  padding: .35rem .65rem;
+  font: inherit;
+  font-size: .75rem;
+  cursor: pointer;
+}
+
+.comments-admin-actions button:hover {
+  border-color: var(--link);
+  color: var(--link);
+}
