@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>留言审核 · 陆寒水的博客</title>
+  <link rel="stylesheet" href="/custom.css?v=4">
+  <style>
+    body { max-width: 900px; }
+    .admin-shell { margin-top: 2rem; }
+    .admin-note { color: var(--muted); }
+    .admin-toolbar { display:flex; gap:.75rem; flex-wrap:wrap; margin:1.5rem 0; }
+    .admin-item { padding:1.25rem 0; border-bottom:1px solid var(--border); }
+    .admin-meta { color:var(--muted); font-size:.85rem; margin-bottom:.6rem; }
+    .admin-content { white-space:pre-wrap; word-break:break-word; margin-bottom:1rem; }
+    .admin-actions { display:flex; gap:.6rem; flex-wrap:wrap; }
+    .admin-actions button, .admin-login {
+      border:1px solid var(--border); background:#fff; color:var(--text);
+      border-radius:6px; padding:.55rem .9rem; cursor:pointer;
+    }
+    .admin-actions button:hover, .admin-login:hover { border-color:var(--link); color:var(--link); }
+    .admin-actions button.approve { border-color:#7b9b78; }
+    .admin-actions button.reject { border-color:#b58a8a; }
+    .admin-error { color:#a13d3d; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/" class="title"><h2>陆寒水的博客</h2></a>
+  </header>
+
+  <main class="admin-shell">
+    <h1>留言审核</h1>
+    <p class="admin-note">这个页面只给留言管理员使用。普通 Google 用户即使知道地址，也没有审核权限。</p>
+
+    <div id="admin-login">
+      <button class="admin-login" id="login-button">使用 Google 账号登录</button>
+    </div>
+
+    <div id="admin-panel" hidden>
+      <p id="admin-user"></p>
+      <div class="admin-toolbar">
+        <button class="admin-login" id="refresh-button">刷新</button>
+        <button class="admin-login" id="logout-button">退出登录</button>
+      </div>
+      <div id="admin-status"></div>
+      <div id="admin-list"></div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "{{SUPABASE_URL}}";
+    const SUPABASE_PUBLISHABLE_KEY = "{{SUPABASE_PUBLISHABLE_KEY}}";
+
+    const loginBox = document.getElementById("admin-login");
+    const panel = document.getElementById("admin-panel");
+    const list = document.getElementById("admin-list");
+    const status = document.getElementById("admin-status");
+    const userText = document.getElementById("admin-user");
+
+    function message(text, error = false) {
+      status.textContent = text || "";
+      status.className = error ? "admin-error" : "";
+    }
+
+    if (!SUPABASE_URL || SUPABASE_URL.startsWith("{{")) {
+      message("请先在 hugo.toml 配置留言系统。", true);
+    } else {
+      const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+      });
+
+      function isAdmin(user) {
+        return user?.app_metadata?.comment_admin === true;
+      }
+
+      async function renderSession(session) {
+        const user = session?.user;
+        if (!user) {
+          loginBox.hidden = false;
+          panel.hidden = true;
+          return;
+        }
+
+        if (!isAdmin(user)) {
+          loginBox.hidden = false;
+          panel.hidden = true;
+          message("这个 Google 账号没有留言审核权限。", true);
+          return;
+        }
+
+        loginBox.hidden = true;
+        panel.hidden = false;
+        userText.textContent = "已登录：" + (user.email || "管理员");
+        await loadComments();
+      }
+
+      async function loadComments() {
+        message("正在加载……");
+        list.replaceChildren();
+
+        const { data, error } = await client
+          .from("comments")
+          .select("id, page_path, display_name, content, status, created_at")
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          message("加载失败：" + error.message, true);
+          return;
+        }
+
+        message("");
+
+        if (!data?.length) {
+          list.textContent = "暂无留言。";
+          return;
+        }
+
+        data.forEach((comment) => {
+          const item = document.createElement("article");
+          item.className = "admin-item";
+
+          const meta = document.createElement("div");
+          meta.className = "admin-meta";
+          meta.textContent =
+            comment.display_name + " · " +
+            new Date(comment.created_at).toLocaleString("zh-CN") +
+            " · " + comment.page_path + " · " + comment.status;
+
+          const body = document.createElement("div");
+          body.className = "admin-content";
+          body.textContent = comment.content;
+
+          const actions = document.createElement("div");
+          actions.className = "admin-actions";
+
+          if (comment.status !== "approved") {
+            const approve = document.createElement("button");
+            approve.className = "approve";
+            approve.textContent = "通过";
+            approve.onclick = () => updateStatus(comment.id, "approved");
+            actions.append(approve);
+          }
+
+          if (comment.status !== "rejected") {
+            const reject = document.createElement("button");
+            reject.className = "reject";
+            reject.textContent = "拒绝";
+            reject.onclick = () => updateStatus(comment.id, "rejected");
+            actions.append(reject);
+          }
+
+          const remove = document.createElement("button");
+          remove.textContent = "删除";
+          remove.onclick = async () => {
+            if (!confirm("确定删除这条留言吗？")) return;
+            const { error } = await client.from("comments").delete().eq("id", comment.id);
+            if (error) message("删除失败：" + error.message, true);
+            else await loadComments();
+          };
+          actions.append(remove);
+
+          item.append(meta, body, actions);
+          list.append(item);
+        });
+      }
+
+      async function updateStatus(id, nextStatus) {
+        const { error } = await client
+          .from("comments")
+          .update({ status: nextStatus })
+          .eq("id", id);
+
+        if (error) {
+          message("操作失败：" + error.message, true);
+          return;
+        }
+
+        await loadComments();
+      }
+
+      document.getElementById("login-button").onclick = async () => {
+        const { error } = await client.auth.signInWithOAuth({
+          provider: "google",
+          options: { redirectTo: window.location.href }
+        });
+        if (error) message("登录失败：" + error.message, true);
+      };
+
+      document.getElementById("refresh-button").onclick = loadComments;
+
+      document.getElementById("logout-button").onclick = async () => {
+        await client.auth.signOut();
+        renderSession(null);
+      };
+
+      client.auth.onAuthStateChange((_event, session) => renderSession(session));
+      client.auth.getSession().then(({ data }) => renderSession(data.session));
+    }
+  </script>
+</body>
+</html>
