@@ -42,6 +42,21 @@
 
   <div class="comments-status" data-comments-status role="status" aria-live="polite"></div>
   <div class="comments-list" data-comments-list></div>
+
+  <div class="comments-admin" data-comments-admin hidden>
+    <div class="comments-admin-heading">
+      <strong>留言管理</strong>
+      <button type="button" class="comments-signout" data-admin-toggle>展开</button>
+    </div>
+    <div data-admin-panel hidden>
+      <div class="comments-admin-toolbar">
+        <span>管理员模式</span>
+        <button type="button" class="comments-signout" data-admin-refresh>刷新</button>
+      </div>
+      <div data-admin-status class="comments-admin-status"></div>
+      <div data-admin-list></div>
+    </div>
+  </div>
 </section>
 
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
