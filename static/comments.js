@@ -25,6 +25,12 @@
   const status = root.querySelector("[data-comments-status]");
   const loginButton = root.querySelector("[data-google-login]");
   const logoutButton = root.querySelector("[data-google-logout]");
+  const adminBox = root.querySelector("[data-comments-admin]");
+  const adminToggle = root.querySelector("[data-admin-toggle]");
+  const adminPanel = root.querySelector("[data-admin-panel]");
+  const adminList = root.querySelector("[data-admin-list]");
+  const adminStatus = root.querySelector("[data-admin-status]");
+  const adminRefresh = root.querySelector("[data-admin-refresh]");
 
   let currentUser = null;
 
@@ -94,6 +100,114 @@
     return item;
   }
 
+  function isAdmin(user) {
+    return user?.app_metadata?.comment_admin === true;
+  }
+
+  function setAdminStatus(message, isError = false) {
+    adminStatus.textContent = message || "";
+    adminStatus.classList.toggle("is-error", isError);
+  }
+
+  async function loadAdminComments() {
+    if (!isAdmin(currentUser)) return;
+
+    adminList.replaceChildren();
+    setAdminStatus("正在加载……");
+
+    const { data, error } = await client
+      .from("comments")
+      .select("id, page_path, display_name, content, status, created_at")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      setAdminStatus("加载失败：" + error.message, true);
+      return;
+    }
+
+    setAdminStatus("");
+
+    if (!data?.length) {
+      const empty = document.createElement("p");
+      empty.className = "comments-empty";
+      empty.textContent = "暂无留言。";
+      adminList.append(empty);
+      return;
+    }
+
+    data.forEach((comment) => {
+      const item = document.createElement("div");
+      item.className = "comments-admin-item";
+
+      const meta = document.createElement("div");
+      meta.className = "comments-admin-meta";
+      meta.textContent =
+        comment.display_name + " · " +
+        new Date(comment.created_at).toLocaleString("zh-CN") +
+        " · " + comment.page_path + " · " + comment.status;
+
+      const body = document.createElement("div");
+      body.className = "comments-admin-content";
+      body.textContent = comment.content;
+
+      const actions = document.createElement("div");
+      actions.className = "comments-admin-actions";
+
+      if (comment.status !== "approved") {
+        const approve = document.createElement("button");
+        approve.type = "button";
+        approve.textContent = "通过";
+        approve.onclick = () => updateCommentStatus(comment.id, "approved");
+        actions.append(approve);
+      }
+
+      if (comment.status !== "rejected") {
+        const reject = document.createElement("button");
+        reject.type = "button";
+        reject.textContent = "拒绝";
+        reject.onclick = () => updateCommentStatus(comment.id, "rejected");
+        actions.append(reject);
+      }
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.textContent = "删除";
+      remove.onclick = async () => {
+        if (!window.confirm("确定删除这条留言吗？")) return;
+        const { error: deleteError } = await client
+          .from("comments")
+          .delete()
+          .eq("id", comment.id);
+
+        if (deleteError) {
+          setAdminStatus("删除失败：" + deleteError.message, true);
+        } else {
+          await loadAdminComments();
+          await loadComments();
+        }
+      };
+      actions.append(remove);
+
+      item.append(meta, body, actions);
+      adminList.append(item);
+    });
+  }
+
+  async function updateCommentStatus(id, nextStatus) {
+    const { error } = await client
+      .from("comments")
+      .update({ status: nextStatus })
+      .eq("id", id);
+
+    if (error) {
+      setAdminStatus("操作失败：" + error.message, true);
+      return;
+    }
+
+    await loadAdminComments();
+    await loadComments();
+  }
+
   async function loadComments() {
     list.replaceChildren();
 
@@ -129,6 +243,7 @@
     if (currentUser) {
       loginBox.hidden = true;
       userBox.hidden = false;
+      adminBox.hidden = !isAdmin(currentUser);
 
       const metadata = currentUser.user_metadata || {};
       userName.textContent =
@@ -140,10 +255,22 @@
       loginBox.hidden = false;
       userBox.hidden = true;
       userName.textContent = "";
+      adminBox.hidden = true;
+      adminPanel.hidden = true;
+      adminToggle.textContent = "展开";
     }
 
     loadComments();
   }
+
+  adminToggle.addEventListener("click", async () => {
+    const shouldOpen = adminPanel.hidden;
+    adminPanel.hidden = !shouldOpen;
+    adminToggle.textContent = shouldOpen ? "收起" : "展开";
+    if (shouldOpen) await loadAdminComments();
+  });
+
+  adminRefresh.addEventListener("click", loadAdminComments);
 
   loginButton.addEventListener("click", async () => {
     setStatus("正在跳转到 Google 登录……");
