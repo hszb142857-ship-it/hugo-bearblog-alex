@@ -91,6 +91,34 @@
 
     item.append(header, body);
 
+    if (comment.status === "approved" && isAdmin(currentUser)) {
+      const actions = document.createElement("div");
+      actions.className = "comment-admin-actions";
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.textContent = "删除";
+      remove.onclick = async () => {
+        if (!window.confirm("确定删除这条留言吗？")) return;
+
+        const { error } = await client
+          .from("comments")
+          .delete()
+          .eq("id", comment.id);
+
+        if (error) {
+          setStatus("删除失败：" + error.message, true);
+          return;
+        }
+
+        await loadComments();
+        if (!adminPanel.hidden) await loadAdminComments();
+      };
+
+      actions.append(remove);
+      item.append(actions);
+    }
+
     if (comment.status === "pending") {
       const pending = document.createElement("div");
       pending.className = "comment-pending";
