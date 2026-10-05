@@ -14,7 +14,7 @@ jobs:
       - name: Query Supabase comments
         env:
           SUPABASE_URL: https://cqvcepicdxkklfnumxsw.supabase.co
-          SUPABASE_PUBLISHABLE_KEY: sb_publishable_CAUT1Vmjl1NVm1s6lTb1g_Uu76yF5U
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_CAUT1Vmjl1NVm1s6lTbH1g_Uu76yF5U
         run: |
           set -euo pipefail
 
