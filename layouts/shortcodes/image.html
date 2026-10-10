@@ -1,0 +1,7 @@
+{{ $opacity := math.Max 0 (math.Min 1 (float (.Get "opacity" | default "1"))) }}
+{{ $blur := math.Max 0 (math.Min 40 (float (.Get "blur" | default "0"))) }}
+{{ $glass := math.Max 0 (math.Min 40 (float (.Get "glass" | default "0"))) }}
+<figure class="content-image" style="{{ printf "--image-opacity:%g;--image-blur:%gpx;--image-glass:%gpx;" $opacity $blur $glass | safeCSS }}">
+<div class="content-image-frame"><img src="{{ .Get "src" }}" alt="{{ .Get "alt" }}" loading="lazy" decoding="async">{{ if gt $glass 0.0 }}<span class="image-glass" aria-hidden="true"></span>{{ end }}</div>
+{{ with .Get "caption" }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>

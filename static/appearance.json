@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "global": {
+    "accent": "#ce412d",
+    "motion": true,
+    "surface": {
+      "opacity": 0.96,
+      "blur": 18
+    },
+    "background": {
+      "src": "/images/grid.svg",
+      "alt": "",
+      "opacity": 0.18,
+      "blur": 0,
+      "focus_x": 50,
+      "focus_y": 50,
+      "fit": "cover"
+    },
+    "masthead": {
+      "src": "",
+      "alt": "",
+      "opacity": 1,
+      "blur": 0,
+      "focus_x": 50,
+      "focus_y": 50,
+      "fit": "cover"
+    },
+    "hero": {
+      "src": "/images/lunar-study.svg",
+      "alt": "银灰色球体、细线轨道与朱红色构成的抽象月相",
+      "opacity": 1,
+      "blur": 0,
+      "focus_x": 50,
+      "focus_y": 50,
+      "fit": "cover"
+    },
+    "cover": {
+      "src": "/images/nocturne.svg",
+      "alt": "灰白几何平面与细红线组成的抽象夜景",
+      "opacity": 1,
+      "blur": 0,
+      "focus_x": 50,
+      "focus_y": 50,
+      "fit": "cover"
+    }
+  },
+  "pages": {}
+}

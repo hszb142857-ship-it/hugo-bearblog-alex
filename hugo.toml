@@ -1,7 +1,7 @@
 baseURL = 'https://hanshui.space/'
 languageCode = 'zh-cn'
 title = '陆寒水的博客'
-theme = 'github.com/janraasch/hugo-bearblog'
+# Self-contained journal layouts; no remote theme dependency.
 
 # 开启 Git 自动追踪修改时间
 enableGitInfo = true

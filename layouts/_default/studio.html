@@ -1,0 +1,36 @@
+{{ define "main" }}
+<link rel="stylesheet" href="{{ "studio.css" | relURL }}">
+<section class="studio-heading"><div class="eyebrow">DESIGN STUDIO / 视觉工作台</div><h1>让留白，成为你的。</h1><p>选择图片，调整光线与质感。所有操作仅在当前浏览器内预览；导出后将文件放入仓库，即可发布。</p></section>
+<div class="studio-layout" data-studio>
+  <form class="studio-controls" onsubmit="return false">
+    <label>配置范围<select data-scope><option value="global">全站默认</option><option value="/">仅首页</option>{{ range where .Site.RegularPages "Section" "blog" }}<option value="{{ .RelPermalink }}">{{ .Title }}</option>{{ end }}</select></label>
+    <label>预览页面<select data-preview-page><option value="/">首页</option>{{ range where .Site.RegularPages "Section" "blog" }}<option value="{{ .RelPermalink }}">{{ .Title }}</option>{{ end }}</select></label>
+    <fieldset><legend>图片位置</legend>
+      <label>选择位置<select data-slot><option value="hero">首页主图</option><option value="cover">文章封面</option><option value="background">页面背景</option><option value="masthead">页眉横幅</option></select></label>
+      <label>图片地址<input type="text" data-field="src" placeholder="/images/your-photo.webp 或 https://…"></label>
+      <label class="upload-label">选取本地图片<input type="file" data-upload accept="image/png,image/jpeg,image/webp,image/avif"></label>
+      <p class="control-note">支持 PNG / JPEG / WebP / AVIF，单张上限 8 MB。选取后自动使用，文件不上传。</p>
+      <label>图片说明<input type="text" data-field="alt" maxlength="500" placeholder="描述图片内容，帮助无障碍阅读"></label>
+      <label>透明度 <output data-output="opacity"></output><input type="range" data-field="opacity" min="0" max="1" step="0.01"></label>
+      <label>图片模糊 <output data-output="blur"></output><input type="range" data-field="blur" min="0" max="40" step="1"></label>
+      <label>水平裁切 <output data-output="focus_x"></output><input type="range" data-field="focus_x" min="0" max="100" step="1"></label>
+      <label>垂直裁切 <output data-output="focus_y"></output><input type="range" data-field="focus_y" min="0" max="100" step="1"></label>
+      <label>适配方式<select data-field="fit"><option value="cover">填满并裁切</option><option value="contain">完整显示</option></select></label>
+      <button type="button" class="studio-secondary" data-clear-image>移除此位置图片</button>
+    </fieldset>
+    <fieldset><legend>阅读面板</legend>
+      <label>面板不透明度 <output data-output="surface-opacity"></output><input type="range" data-surface-field="opacity" min="0.55" max="1" step="0.01"></label>
+      <label>背景磨砂 <output data-output="surface-blur"></output><input type="range" data-surface-field="blur" min="0" max="40" step="1"></label>
+      <p class="control-note">降低面板不透明度后，背景磨砂更明显。正文保留最低遮罩强度。</p>
+      <label>强调色<input type="color" data-accent></label>
+      <label class="check-label"><input type="checkbox" data-motion> 启用轻量动态</label>
+    </fieldset>
+    <div class="studio-actions"><button type="button" data-export>导出配置与图片 ↓</button><button type="button" class="studio-secondary" data-reset>恢复已发布设置</button></div>
+    <label class="upload-label import-label">导入已有配置<input type="file" data-import accept="application/json,.json"></label>
+    <p data-studio-status role="status" aria-live="polite"></p>
+    <p class="control-note">刷新页面会丢弃未导出的预览。这里不会保存或修改任何登录信息、文章和留言。工作台无需管理员权限；其他访客无法通过它修改线上网站。</p>
+  </form>
+  <div class="studio-preview"><div class="preview-toolbar"><span>LIVE PREVIEW</span><div><button type="button" data-viewport="desktop" aria-pressed="true">桌面</button><button type="button" data-viewport="mobile" aria-pressed="false">手机</button><a href="{{ "" | relURL }}" target="_blank" rel="noopener">打开首页 ↗</a></div></div><div class="preview-scroll"><iframe title="博客视觉预览" data-preview src="{{ "" | relURL }}?preview=1"></iframe></div></div>
+</div>
+<script defer src="{{ "studio.js" | relURL }}"></script>
+{{ end }}

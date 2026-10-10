@@ -65,5 +65,5 @@ https://supabase.com/docs/reference/javascript/auth-signinwithoauth
 - 未登录：只能看到已审核留言，并显示 Google 登录按钮。
 - 已登录：可以提交留言；新留言状态固定为 pending。
 - pending 留言只有作者自己和管理员可见。
-- 管理员可以通过 /admin/comments/ 审核、拒绝或删除。
+- 管理员登录后，在首页或文章页留言区下方展开“留言管理”，即可审核、拒绝或删除全站留言；没有独立的 /admin/comments/ 页面。
 - 审核状态直接存在 Supabase 数据库，不需要修改 Markdown，也不需要重新运行 Hugo。

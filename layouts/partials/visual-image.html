@@ -1,0 +1,6 @@
+{{- $s := .settings -}}
+{{- if $s.src -}}
+<figure class="visual-image {{ with .class }}{{ . }}{{ end }}" data-visual-slot="{{ .slot }}" data-opacity="{{ $s.opacity }}" data-blur="{{ $s.blur }}" data-focus-x="{{ $s.focus_x }}" data-focus-y="{{ $s.focus_y }}" data-fit="{{ $s.fit }}">
+<img src="{{ $s.src }}" alt="{{ if .decorative }}{{ else }}{{ $s.alt }}{{ end }}" {{ if eq .slot "hero" }}fetchpriority="high"{{ else }}loading="lazy"{{ end }} decoding="async" width="1200" height="900">
+{{ if and $s.caption (not .decorative) }}<figcaption>{{ $s.caption }}</figcaption>{{ end }}
+</figure>{{- end -}}

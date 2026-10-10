@@ -1,0 +1,4 @@
+{{ define "main" }}
+<section class="list-page surface" data-surface><div class="eyebrow">ARCHIVE / 文字</div><h1>{{ .Title }}</h1>{{ .Content }}
+<ul class="blog-posts">{{ range .Pages.ByDate.Reverse }}<li><span class="post-date"><time>{{ .Date.Format "2006.01.02" }}</time></span><a href="{{ .RelPermalink }}">{{ .Title }}<span class="post-arrow" aria-hidden="true">↗</span></a></li>{{ end }}</ul></section>
+{{ end }}

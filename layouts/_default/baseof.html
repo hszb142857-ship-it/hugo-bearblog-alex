@@ -1,31 +1,28 @@
 <!DOCTYPE html>
-<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
-
+<html lang="{{ .Site.LanguageCode }}">
 <head>
-  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  {{- partial "favicon.html" . -}}
-  <title>{{- block "title" . }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{- end }}</title>
-  {{- partial "seo_tags.html" . -}}
-  <meta name="referrer" content="no-referrer-when-downgrade" />
-  {{ with .OutputFormats.Get "rss" -}}
-  {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
-  {{ end -}}
-  {{- partial "style.html" . -}}
-  {{- partial "custom_head.html" . -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+{{ partial "seo_tags.html" . }}
+<link rel="icon" type="image/svg+xml" href="{{ "images/mark.svg" | relURL }}">
+{{ with .OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ $.Site.Title }}">{{ end }}
+<link rel="stylesheet" href="{{ "custom.css" | relURL }}">
+<script defer src="{{ "design.js" | relURL }}"></script>
 </head>
-
-<body class="{{ if .IsHome }}home{{ else }}page{{ end }}">
-  <header>
-    {{- partial "header.html" . -}}
-  </header>
-  <main>
-    {{- block "main" . }}{{- end }}
-  </main>
-  <footer>
-    {{- partial "footer.html" . -}}
-  </footer>
-  {{- partial "custom_body.html" . -}}
-</body>
-</html>
+<body class="{{ if .IsHome }}home{{ else }}page{{ end }}{{ if eq .Layout "studio" }} studio-page{{ end }}" data-page-path="{{ .RelPermalink }}">
+<a class="skip-link" href="#main">跳至正文</a>
+{{ $appearance := partial "appearance.html" . }}
+<script id="site-appearance" type="application/json">{{ $appearance | jsonify | safeJS }}</script>
+<div class="ambient" aria-hidden="true">{{ partial "visual-image.html" (dict "settings" $appearance.background "slot" "background" "decorative" true) }}</div>
+<div class="reading-progress" aria-hidden="true"></div>
+<header class="site-header shell">{{ partial "header.html" . }}</header>
+<main id="main" class="shell">{{ block "main" . }}{{ end }}</main>
+<footer class="site-footer shell">
+<a class="footer-title" href="{{ "" | relURL }}">{{ .Site.Title }}</a>
+<div class="footer-links"><a href="{{ "index.xml" | relURL }}">RSS 订阅 ↗</a><a href="#top" data-back-top>回到顶部 ↑</a></div>
+<span class="footer-colophon">HANSHUI / SPACE · {{ now.Year }}</span>
+</footer>
+</body></html>

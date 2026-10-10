@@ -1,9 +1,15 @@
 {{ define "main" }}
-<div class="home-page">
-  <div class="home-intro">
-    {{ .Content }}
-  </div>
-
-  {{ partial "comments.html" . }}
+{{ $appearance := partial "appearance.html" . }}
+<section class="home-hero" aria-labelledby="home-heading">
+<div class="hero-type">
+<div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> PERSONAL JOURNAL <span class="edition">01 / ONGOING</span></div>
+<h1 id="home-heading">陆寒水<span class="hero-space">的博客<span class="type-dot" aria-hidden="true">.</span></span></h1>
+<div class="hero-rule" aria-hidden="true"><span></span><span>文字 / 时间 / 留白</span></div>
 </div>
+<div class="hero-art">
+{{ partial "visual-image.html" (dict "settings" $appearance.hero "slot" "hero") }}
+<div class="art-label" aria-hidden="true"><span>FIG. 01</span><span>万象挂空明</span><span>↗</span></div>
+</div></section>
+<div class="home-intro surface" data-surface>{{ .Content }}</div>
+<div id="guestbook" class="guestbook-wrap surface" data-surface>{{ partial "comments.html" . }}</div>
 {{ end }}

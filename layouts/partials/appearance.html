@@ -1,0 +1,4 @@
+{{- $config := transform.Unmarshal (readFile "static/appearance.json") -}}
+{{- $settings := $config.global -}}
+{{- with index $config.pages .RelPermalink -}}{{- $settings = merge $settings . -}}{{- end -}}
+{{- return $settings -}}

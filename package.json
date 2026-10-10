@@ -1,0 +1,13 @@
+{
+  "name": "hanshui-space",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Development-only regression checks for the Hugo journal",
+  "scripts": {
+    "verify": "node scripts/verify-preservation.mjs",
+    "test": "hugo --destination .qa/public && node tests/ui-regression.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}

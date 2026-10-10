@@ -1,11 +1,10 @@
 {{- $posts := where site.RegularPages "Section" "blog" -}}
+<div id="articles" class="article-index">
+<div class="index-meta"><span>INDEX / {{ printf "%02d" (len $posts) }}</span><span>按时间倒序</span></div>
 <ul class="blog-posts">
-  {{- range $posts.ByDate.Reverse -}}
-    <li>
-      <span>
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-      </span>
-      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-    </li>
-  {{- end -}}
-</ul>
+{{- range $index, $post := $posts.ByDate.Reverse -}}
+<li><span class="post-number" aria-hidden="true">{{ printf "%02d" (add $index 1) }}</span>
+<span class="post-date"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></span>
+<a href="{{ .RelPermalink }}">{{ .Title }}<span class="post-arrow" aria-hidden="true">↗</span></a></li>
+{{- end -}}
+</ul></div>

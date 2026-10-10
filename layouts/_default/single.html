@@ -1,23 +1,16 @@
 {{ define "main" }}
-<article>
-  <h1>{{ .Title }}</h1>
-
-  <div class="post-meta">
-    <time datetime="{{ .Date.Format "2006-01-02" }}">
-      {{ .Date.Format "2006-01-02" }}
-    </time>
-    {{ if ne .Lastmod .Date }}
-      <span aria-hidden="true"> · </span>
-      <span>更新于 {{ .Lastmod.Format "2006-01-02 15:04" }}</span>
-    {{ end }}
-  </div>
-
-  {{ .Content }}
-
-  <div class="post-updated">
-    最后修改于 <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format "2006-01-02" }}</time>
-  </div>
-
-  {{ partial "comments.html" . }}
-</article>
-{{ end }}
+{{ $appearance := partial "appearance.html" . }}
+<article class="journal-article">
+<header class="article-heading">
+<div class="eyebrow">JOURNAL <span class="edition">{{ .Date.Format "2006" }} / 文字</span></div>
+<h1>{{ .Title }}</h1>
+<div class="post-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+{{ if ne .Lastmod .Date }}<span aria-hidden="true"> / </span><span>更新于 {{ .Lastmod.Format "2006-01-02 15:04" }}</span>{{ end }}</div>
+</header>
+<div class="article-cover">{{ partial "visual-image.html" (dict "settings" $appearance.cover "slot" "cover") }}</div>
+<div class="article-layout">
+<aside class="article-rail" aria-hidden="true"><span>HANSHUI / NOTES</span><span class="rail-line"></span><span>↓</span></aside>
+<div class="article-body surface" data-surface><div class="prose">{{ .Content }}</div>
+<div class="post-updated">最后修改于 <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format "2006-01-02" }}</time></div>
+<div id="guestbook">{{ partial "comments.html" . }}</div></div></div>
+</article>{{ end }}
