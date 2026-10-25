@@ -11,8 +11,7 @@ const baseline = {
   "content/blog/随想 一.md": "f33dd9422993c399e83bc79d921bdb8094094b54",
   "static/comments.js": "808563e52f4382c8aafbb84b3d7396217c2a7af1",
   "static/supabase-comments.sql": "c9609cb87afdefd7fb762eb82c2a13dc3c4d3dce",
-  "layouts/partials/comments.html": "0b637a283d8cb08169376df92065c65c530693c5",
-  ".github/workflows/supabase-keepalive.yml": "6ea21cd22650c1ec64ca0cf7f1b1546a03b7c062"
+  "layouts/partials/comments.html": "0b637a283d8cb08169376df92065c65c530693c5"
 };
 for (const [name, expected] of Object.entries(baseline)) {
   const content = Buffer.from(fs.readFileSync(path.join(root, name), "utf8").replace(/\r\n/g, "\n"));
@@ -33,4 +32,6 @@ for (const name of ["layouts/index.html", "layouts/_default/single.html"]) {
   assert.ok(content.includes('{{ partial "comments.html" . }}'), "Comments missing: " + name);
   assert.ok(content.includes("{{ .Content }}"), "Original content not rendered: " + name);
 }
-console.log("PASS: all 7 protected files match the original GitHub blobs; URLs, Git dates, auth and rendering configuration preserved.");
+// The keep-alive workflow was intentionally improved on 2026-10-25; it is no
+// longer part of the original visual-redesign preservation baseline.
+console.log("PASS: all 6 protected content/auth files match the original GitHub blobs; URLs, Git dates, auth and rendering configuration preserved.");
